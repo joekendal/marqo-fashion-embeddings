@@ -1,0 +1,13 @@
+build:
+  gpu: true
+  python_version: "3.8"
+  python_packages:
+    - torch
+    - transformers
+    - pillow
+    - ftfy
+    - open_clip_torch
+
+image: "r8.im/joekendal/marqo-fashion-embeddings"
+
+predict: "predict.py:Predictor"

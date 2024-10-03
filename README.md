@@ -1,0 +1,15 @@
+# Marqo FashionSigLIP Model
+
+## Overview
+
+The Marqo FashionSigLIP model is designed to enhance fashion-related search and recommendation systems.
+
+It outperforms OpenAI's CLIP and FashionCLIP across relevant benchmarks for open fashion datasets. For more info visit their [announcement](https://www.marqo.ai/blog/search-model-for-fashion), [the model card](https://huggingface.co/Marqo/marqo-fashionSigLIP) and/or GitHub [repo](https://github.com/marqo-ai/marqo-FashionCLIP)
+
+This replicate API takes an input of an image + text for the fashion product and returns the embeddings of each + a concatenated embedding of both which can be used for multi-modal search instead.
+
+For example, you may have a product JSON in your database with multiple fields. In this case you can vectorize the values by concatenating the string and string[] fields after sorting the keys in alphabetical order and then lowercase the whole string.
+
+You combine this with the image embedding to perform semantic queries in your vector store.
+
+They have licensed their model under Apache 2.0 so you are able to use it commercially.
