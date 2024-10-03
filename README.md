@@ -2,6 +2,8 @@
 
 ## Overview
 
+Replicate URL: [https://replicate.com/joekendal/marqo-fashion-embeddings](https://replicate.com/joekendal/marqo-fashion-embeddings)
+
 The Marqo FashionSigLIP model is designed to enhance fashion-related search and recommendation systems.
 
 It outperforms OpenAI's CLIP and FashionCLIP across relevant benchmarks for open fashion datasets. For more info visit their [announcement](https://www.marqo.ai/blog/search-model-for-fashion), [the model card](https://huggingface.co/Marqo/marqo-fashionSigLIP) and/or GitHub [repo](https://github.com/marqo-ai/marqo-FashionCLIP)
