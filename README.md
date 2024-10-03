@@ -1,8 +1,8 @@
 # Marqo FashionSigLIP Model
 
-## Overview
-
 Replicate URL: [https://replicate.com/joekendal/marqo-fashion-embeddings](https://replicate.com/joekendal/marqo-fashion-embeddings)
+
+## Overview
 
 The Marqo FashionSigLIP model is designed to enhance fashion-related search and recommendation systems.
 
