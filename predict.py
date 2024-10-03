@@ -16,7 +16,7 @@ class Predictor(BasePredictor):
 
     def predict(self, 
         images: List[Path] = Input(description="The product image(s)"), 
-        text: str = Input(description="The relevant product text attributes joined by spaces"),
+        text: str = Input(description="The relevant product text attributes joined by commas"),
         combined: bool = Input(default=True, description="Whether to return the combined image and text embeddings instead of separate ones")
     ) -> dict:
         # Split text input into a list
@@ -26,8 +26,12 @@ class Predictor(BasePredictor):
         processed_images = []
         for image in images:
             try:
-                response = requests.get(image)
-                img = Image.open(BytesIO(response.content)).convert("RGB")
+                if(image.startswith('http')):
+                    response = requests.get(image)
+                    img = Image.open(BytesIO(response.content))
+                else:
+                    img = Image.open(image)
+                                    
                 processed_images.append(img)
             except Exception as e:
                 raise ValueError(f"Error loading image: {e}")            
