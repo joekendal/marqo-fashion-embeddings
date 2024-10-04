@@ -15,30 +15,27 @@ class Predictor(BasePredictor):
         self.processor = AutoProcessor.from_pretrained('Marqo/marqo-fashionSigLIP', trust_remote_code=True)
 
     def predict(self, 
-        images: List[Path] = Input(description="The product image(s)"), 
+        image: Path = Input(description="The product image"), 
         text: str = Input(description="The relevant product text attributes joined by commas"),
         combined: bool = Input(default=True, description="Whether to return the combined image and text embeddings instead of separate ones")
     ) -> dict:
-        # Split text input into a list
-        text = text.split(",")
+        # Replace commas with spaces and strip whitespace
+        text = ' '.join(part.strip() for part in text.split(','))
 
-        # Download the images from the URLs and convert them to PIL Images
-        processed_images = []
-        for image in images:
-            try:
-                if(image.startswith('http')):
-                    response = requests.get(image)
-                    img = Image.open(BytesIO(response.content))
-                else:
-                    img = Image.open(image)
-                                    
-                processed_images.append(img)
-            except Exception as e:
-                raise ValueError(f"Error loading image: {e}")            
+        # Download the images from the URLs and convert them to PIL Images    
+        try:
+            if(str(image).startswith('http')):
+                response = requests.get(image)
+                img = Image.open(BytesIO(response.content))
+            else:
+                img = Image.open(image)
+                               
+        except Exception as e:
+            raise ValueError(f"Error loading image: {e}")            
 
 
         # Preprocess the image and text
-        processed = self.processor(text=text, images=processed_images, padding='max_length', return_tensors="pt")
+        processed = self.processor(text=[text], images=[img], padding='max_length', return_tensors="pt")
 
         # Extract image and text embeddings without gradients (for inference)
         with torch.no_grad():
